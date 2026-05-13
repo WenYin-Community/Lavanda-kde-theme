@@ -81,7 +81,7 @@ SessionManagementScreen {
         text: lastUserName
         visible: showUsernamePrompt
         focus: showUsernamePrompt && !lastUserName //if there's a username prompt it gets focus first, otherwise password does
-        placeholderText: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Username")
+        placeholderText: i18n( "Username")
         placeholderTextColor: passwordFieldOutlined ? "white" : "white"
         color: "white"
         //horizontalAlignment: TextInput.AlignHCenter
@@ -96,7 +96,7 @@ SessionManagementScreen {
         Layout.preferredHeight: 30
         opacity: passwordFieldOutlined ? 1.0 : 0.75
         font.family: config.Font || "Noto Sans"
-        placeholderText: config.PasswordFieldPlaceholderText == "Password" ? i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Password") : config.PasswordFieldPlaceholderText
+        placeholderText: config.PasswordFieldPlaceholderText == "Password" ? i18n( "Password") : config.PasswordFieldPlaceholderText
         focus: !showUsernamePrompt || lastUserName
         echoMode: TextInput.Password
         onAccepted: startLogin()

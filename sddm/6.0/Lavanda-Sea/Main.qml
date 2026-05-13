@@ -193,7 +193,7 @@ Item {
                 notificationMessage: {
                     const parts = [];
                     if (capsLockState.locked) {
-                        parts.push(i18nd("plasma-desktop-sddm-theme", "Caps Lock is on"));
+                        parts.push(i18n( "Caps Lock is on"));
                     }
                     if (root.notificationMessage) {
                         parts.push(root.notificationMessage);
@@ -205,25 +205,25 @@ Item {
                 actionItems: [
                     ActionButton {
                         icon.name: "/usr/share/sddm/themes/Lavanda-Sea/assets/suspend_primary.svgz"
-                        text: i18ndc("plasma-desktop-sddm-theme", "Suspend to RAM", "Sleep")
+                        text: i18nc( "Suspend to RAM", "Sleep")
                         onClicked: sddm.suspend()
                         enabled: sddm.canSuspend
                     },
                     ActionButton {
                         icon.name: "/usr/share/sddm/themes/Lavanda-Sea/assets/restart_primary.svgz"
-                        text: i18nd("plasma-desktop-sddm-theme", "Restart")
+                        text: i18n( "Restart")
                         onClicked: sddm.reboot()
                         enabled: sddm.canReboot
                     },
                     ActionButton {
                         icon.name: "/usr/share/sddm/themes/Lavanda-Sea/assets/shutdown_primary.svgz"
-                        text: i18nd("plasma-desktop-sddm-theme", "Shut Down")
+                        text: i18n( "Shut Down")
                         onClicked: sddm.powerOff()
                         enabled: sddm.canPowerOff
                     },
                     ActionButton {
                         icon.name: "/usr/share/sddm/themes/Lavanda-Sea/assets/switch_primary.svgz"
-                        text: i18ndc("plasma-desktop-sddm-theme", "For switching to a username and password prompt", "Other…")
+                        text: i18nc( "For switching to a username and password prompt", "Other…")
                         onClicked: mainStack.push(userPromptComponent)
                         visible: !userListComponent.showUsernamePrompt
                     }]
@@ -330,7 +330,7 @@ Item {
                     }
                     Component.onCompleted: {
                         // as we can't bind inside ListElement
-                        setProperty(0, "name", i18nd("plasma-desktop-sddm-theme", "Type in Username and Password"));
+                        setProperty(0, "name", i18n( "Type in Username and Password"));
                         setProperty(0, "icon", Qt.resolvedUrl("faces/.face.icon"))
                     }
                 }
@@ -344,25 +344,25 @@ Item {
                 actionItems: [
                     ActionButton {
                         icon.name: "/usr/share/sddm/themes/Lavanda-Sea/assets/suspend_primary.svgz"
-                        text: i18ndc("plasma-desktop-sddm-theme", "Suspend to RAM", "Sleep")
+                        text: i18nc( "Suspend to RAM", "Sleep")
                         onClicked: sddm.suspend()
                         enabled: sddm.canSuspend
                     },
                     ActionButton {
                         icon.name: "/usr/share/sddm/themes/Lavanda-Sea/assets/restart_primary.svgz"
-                        text: i18nd("plasma-desktop-sddm-theme", "Restart")
+                        text: i18n( "Restart")
                         onClicked: sddm.reboot()
                         enabled: sddm.canReboot
                     },
                     ActionButton {
                         icon.name: "/usr/share/sddm/themes/Lavanda-Sea/assets/shutdown_primary.svgz"
-                        text: i18nd("plasma-desktop-sddm-theme", "Shut Down")
+                        text: i18n( "Shut Down")
                         onClicked: sddm.powerOff()
                         enabled: sddm.canPowerOff
                     },
                     ActionButton {
                        icon.name: "/usr/share/sddm/themes/Lavanda-Sea/assets/switch_primary.svgz"
-                        text: i18nd("plasma-desktop-sddm-theme", "List Users")
+                        text: i18n( "List Users")
                         onClicked: mainStack.pop()
                     }
                 ]
@@ -435,7 +435,7 @@ Item {
             PlasmaComponents3.ToolButton {
                 id: virtualKeyboardButton
 
-                text: i18ndc("plasma-desktop-sddm-theme", "Button to show/hide virtual keyboard", "Virtual Keyboard")
+                text: i18nc( "Button to show/hide virtual keyboard", "Virtual Keyboard")
                 icon.name: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
                 onClicked: {
                     // Otherwise the password field loses focus and virtual keyboard
@@ -502,7 +502,7 @@ Item {
     Connections {
         target: sddm
         function onLoginFailed() {
-            notificationMessage = i18nd("plasma-desktop-sddm-theme", "Login Failed")
+            notificationMessage = i18n( "Login Failed")
             footer.enabled = true
             mainStack.enabled = true
             userListComponent.userList.opacity = 1
