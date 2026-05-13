@@ -37,11 +37,32 @@ prompt () {
   esac
 }
 
+compile_translations() {
+  local theme_dir="${1}"
+  local ts_dir="${theme_dir}/translations"
+
+  if [ -d "${ts_dir}" ]; then
+    for ts_file in "${ts_dir}"/*.ts; do
+      [ -f "${ts_file}" ] || continue
+      local qm_file="${ts_file%.ts}.qm"
+      if command -v lrelease >/dev/null 2>&1; then
+        lrelease "${ts_file}" -qm "${qm_file}" 2>/dev/null
+      elif command -v lrelease-qt6 >/dev/null 2>&1; then
+        lrelease-qt6 "${ts_file}" -qm "${qm_file}" 2>/dev/null
+      fi
+    done
+  fi
+}
+
 install() {
   prompt -i "\n * Install ${name} in ${THEME_DIR}... "
   rm -rf "${THEME_DIR}/${name}" "${THEME_DIR}/${name}-Sea"
   cp -rf "${REO_DIR}/${name}" "${THEME_DIR}"
   cp -rf "${REO_DIR}/${name}-Sea" "${THEME_DIR}"
+
+  compile_translations "${THEME_DIR}/${name}"
+  compile_translations "${THEME_DIR}/${name}-Sea"
+
   # Success message
   prompt -s "\n * All done!"
 }

@@ -2,6 +2,8 @@
 
 Lavanda kde theme is a clean and concise theme for KDE Plasma 6 desktop.
 
+Requires Plasma 6.1+ (Qt 6.5+).
+
 In this repository you'll find:
 
 - Aurorae Theme
@@ -10,7 +12,7 @@ In this repository you'll find:
 - Plasma Color Scheme
 - Plasma Desktop Theme
 - Plasma Global Theme
-- SDDM Theme
+- SDDM Theme (with zh_CN localization)
 
 ## Installation
 
@@ -18,13 +20,12 @@ In this repository you'll find:
 ./install.sh
 ```
 
-### SDDM Theme
+The installer will prompt whether to install the SDDM theme (requires root).
 
-SDDM theme requires root to install:
+To install SDDM theme manually:
 
 ```sh
-cd sddm/6.0
-sudo ./install.sh
+sudo ./sddm/6.0/install.sh
 ```
 
 Then set `Current=Lavanda` or `Current=Lavanda-Sea` in `/etc/sddm.conf`.

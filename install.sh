@@ -85,3 +85,9 @@ for theme in "${themes[@]:-${THEME_VARIANTS[@]}}"; do
 done
 
 echo "Install finished..."
+
+# Ask user if they want to install SDDM theme
+read -r -p "Install SDDM theme? (requires root) [y/N] " answer
+if [[ "${answer}" =~ ^[Yy]$ ]]; then
+  sudo bash "${SRC_DIR}/sddm/6.0/install.sh"
+fi
