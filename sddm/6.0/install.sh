@@ -63,6 +63,16 @@ install() {
   compile_translations "${THEME_DIR}/${name}"
   compile_translations "${THEME_DIR}/${name}-Sea"
 
+  # Configure SDDM locale for zh_CN
+  if [[ "${LANG}" == zh_CN* ]]; then
+    mkdir -p /etc/sddm.conf.d
+    cat > /etc/sddm.conf.d/locale.conf << 'EOF'
+[General]
+Locale=zh_CN.UTF-8
+EOF
+    prompt -s " * SDDM locale configured for zh_CN.UTF-8"
+  fi
+
   # Success message
   prompt -s "\n * All done!"
 }

@@ -28,7 +28,17 @@ To install SDDM theme manually:
 sudo ./sddm/6.0/install.sh
 ```
 
-Then set `Current=Lavanda` or `Current=Lavanda-Sea` in `/etc/sddm.conf`.
+### SDDM Localization
+
+The SDDM theme includes zh_CN translations. On zh_CN systems, the install script automatically configures SDDM locale via `/etc/sddm.conf.d/locale.conf`.
+
+After installation, restart SDDM for translations to take effect:
+
+```sh
+sudo systemctl restart sddm
+```
+
+If a theme does not have translations for your locale, SDDM will display the original English strings.
 
 ## Uninstall
 
