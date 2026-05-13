@@ -1,7 +1,6 @@
-
 ## Lavanda KDE Theme
 
-Lavanda kde theme is a clean and concise theme for KDE Plasma desktop.
+Lavanda kde theme is a clean and concise theme for KDE Plasma 6 desktop.
 
 In this repository you'll find:
 
@@ -11,12 +10,24 @@ In this repository you'll find:
 - Plasma Color Scheme
 - Plasma Desktop Theme
 - Plasma Global Theme
+- SDDM Theme
 
 ## Installation
 
 ```sh
 ./install.sh
 ```
+
+### SDDM Theme
+
+SDDM theme requires root to install:
+
+```sh
+cd sddm/6.0
+sudo ./install.sh
+```
+
+Then set `Current=Lavanda` or `Current=Lavanda-Sea` in `/etc/sddm.conf`.
 
 ## Uninstall
 
@@ -34,17 +45,11 @@ In this repository you'll find:
 
 - Install [Lavanda gtk theme](https://github.com/vinceliuice/Lavanda-gtk-theme) for a more consistent and beautiful experience.
 
-## Donate
-
-If you like my project, you can donate at:
-
-<span class="paypal"><a href="https://www.paypal.me/vinceliuice" title="Donate to this project using Paypal"><img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png" alt="PayPal donate button" /></a></span>
-
 ## License
 
 GNU GPL v3
 
-## preview
+## Preview
 
 ![light](Screenshot_light.png)
 ![dark](Screenshot_dark.png)

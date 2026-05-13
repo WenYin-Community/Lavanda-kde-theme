@@ -7,9 +7,9 @@ X-KDE-PluginInfo-Email=vinceliuice@hotmail.com
 X-KDE-PluginInfo-EnabledByDefault=true
 X-KDE-PluginInfo-License=LGPL
 X-KDE-PluginInfo-Name=Lavanda-Light
-X-KDE-PluginInfo-Version=5.78.1
+X-KDE-PluginInfo-Version=6.6.4
 X-KDE-PluginInfo-Website=https://plasma.kde.org
-X-Plasma-API=5.0
+X-Plasma-API=6.0
 
 [AdaptiveTransparency]
 enabled=true

@@ -1,6 +1,6 @@
-import QtQuick 2.15
-import QtQuick.Layouts 1.15
-import QtQuick.Controls 2.15
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
 
 TextField {
     placeholderTextColor: config.color
@@ -10,7 +10,7 @@ TextField {
     width: parent.width
     background: Rectangle {
         radius: 100
-        color: "#31c4b6"
+        color: "#be5fca"
         border.color: "white"
         border.width: 2
     }

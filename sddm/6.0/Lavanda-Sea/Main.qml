@@ -4,15 +4,14 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-import QtQuick 2.15
-import QtQuick.Layouts 1.15
-import QtQuick.Controls 2.15 as QQC2
-import Qt5Compat.GraphicalEffects
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls as QQC2
+import QtQuick.Effects
 
-import org.kde.plasma.components 3.0 as PlasmaComponents3
-import org.kde.plasma.plasma5support 2.0 as P5Support
+import org.kde.plasma.components as PlasmaComponents3
 import org.kde.plasma.private.keyboardindicator as KeyboardIndicator
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kirigami as Kirigami
 
 import org.kde.breeze.components
 
@@ -113,16 +112,15 @@ Item {
             clock: clock
         }
 
-        DropShadow {
+        MultiEffect {
             id: clockShadow
             anchors.fill: clock
             source: clock
             visible: !softwareRendering && config.showClock === "true"
-            radius: 7
-            verticalOffset: 0.8
-            samples: 15
-            spread: 0.2
-            color : Qt.rgba(0, 0, 0, 0.7)
+            shadowEnabled: true
+            shadowColor: Qt.rgba(0, 0, 0, 0.7)
+            shadowBlur: 0.4
+            shadowVerticalOffset: 0.8
             opacity: loginScreenRoot.uiVisible ? 0 : 1
             Behavior on opacity {
                 OpacityAnimator {
@@ -371,17 +369,16 @@ Item {
             }
         }
 
-        DropShadow {
+        MultiEffect {
             id: logoShadow
             anchors.fill: logo
             source: logo
             visible: !softwareRendering && config.showlogo === "shown"
-            horizontalOffset: 1
-            verticalOffset: 1
-            radius: 6
-            samples: 14
-            spread: 0.3
-            color : "black" // shadows should always be black
+            shadowEnabled: true
+            shadowColor: "black"
+            shadowBlur: 0.35
+            shadowHorizontalOffset: 1
+            shadowVerticalOffset: 1
             opacity: loginScreenRoot.uiVisible ? 0 : 1
             Behavior on opacity {
                 //OpacityAnimator when starting from 0 is buggy (it shows one frame with opacity 1)"
