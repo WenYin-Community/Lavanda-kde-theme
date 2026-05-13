@@ -65,12 +65,13 @@ install() {
 
   # Configure SDDM locale for zh_CN
   if [[ "${LANG}" == zh_CN* ]]; then
-    mkdir -p /etc/sddm.conf.d
-    cat > /etc/sddm.conf.d/locale.conf << 'EOF'
-[General]
-Locale=zh_CN.UTF-8
-EOF
-    prompt -s " * SDDM locale configured for zh_CN.UTF-8"
+    local SYSCTL="/etc/sysconfig/sddm"
+    if [ -f "${SYSCTL}" ]; then
+      if ! grep -q "^LANG=" "${SYSCTL}"; then
+        echo 'LANG=zh_CN.UTF-8' >> "${SYSCTL}"
+        prompt -s " * SDDM locale configured for zh_CN.UTF-8"
+      fi
+    fi
   fi
 
   # Success message

@@ -23,11 +23,9 @@ When adding a component, you must replicate it for all 4 variants with the corre
 
 ## Critical: Logout.qml
 
-Only `Lavanda-Light` has `contents/logout/`. The other 3 variants fallback to Breeze's logout screen. If you modify Logout.qml, you should copy it to all 4 look-and-feel themes:
-
-```
-plasma/look-and-feel/com.github.vinceliuice.Lavanda-{Light,Dark,Sea-Light,Sea-Dark}/contents/logout/
-```
+All 4 variants have `contents/logout/`. Background color differs by variant:
+- Light variants: `color: "white"` / `opacity: 0.65`
+- Dark variants: `color: "black"` / `opacity: 0.65`
 
 Required files per logout dir: `Logout.qml`, `LogoutButton.qml`, `timer.js`.
 
@@ -35,9 +33,19 @@ Required files per logout dir: `Logout.qml`, `LogoutButton.qml`, `timer.js`.
 
 Only `sddm/6.0/` is maintained (Plasma 5 support was removed). Has its own `install.sh` that requires **root** (installs to `/usr/share/sddm/themes`).
 
+### zh_CN Localization
+
+SDDM theme includes zh_CN translations in `translations/Lavanda_zh_CN.ts`. The install script:
+1. Compiles `.ts` → `.qm` via `lrelease` (requires `qt6-linguist`)
+2. On zh_CN systems, adds `LANG=zh_CN.UTF-8` to `/etc/sysconfig/sddm`
+
+SDDM reads locale from `/etc/sysconfig/sddm`, **not** `sddm.conf`'s `Locale=` setting.
+
+Translation files use theme domain `Lavanda` (matching `Theme-Id` in metadata.desktop). QML uses `i18n()` / `i18nc()` (not `i18nd()`).
+
 ## Known Issues
 
-- **SDDM 6.0** — Uses `org.kde.plasma.plasma5support` transitional module, may break in future Plasma releases.
+None.
 
 ## Install Behavior
 

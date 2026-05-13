@@ -30,7 +30,7 @@ sudo ./sddm/6.0/install.sh
 
 ### SDDM Localization
 
-The SDDM theme includes zh_CN translations. On zh_CN systems, the install script automatically configures SDDM locale via `/etc/sddm.conf.d/locale.conf`.
+The SDDM theme includes zh_CN translations. On zh_CN systems, the install script automatically configures SDDM locale by adding `LANG=zh_CN.UTF-8` to `/etc/sysconfig/sddm`.
 
 After installation, restart SDDM for translations to take effect:
 
