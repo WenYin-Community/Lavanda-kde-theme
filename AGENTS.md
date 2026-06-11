@@ -1,75 +1,60 @@
-# Lavanda-kde-theme Agent Guide
+# AGENTS.md — Lavanda KDE Theme
 
-## What This Is
+## Project overview
 
-A KDE Plasma 6 theme package (fork of vinceliuice/Lavanda-kde). Contains aurorae decorations, color schemes, desktop themes, global themes (look-and-feel), Kvantum themes, SDDM themes, and wallpapers. No build system, no tests, no CI — pure asset repo.
+KDE Plasma 6.1+ theme (Qt 6.5+). Not a code project — no build system, linter, tests, or CI.
+All assets are declarative config files (`.colors`, `.svg`, `.qml`, `.desktop`, `theme.conf`).
 
-## Variant Matrix
+## Theme variants
 
-The theme ships 4 combinations generated from two axes:
+Two theme families × two color modes = four combos:
 
-| | `-Light` | `-Dark` |
-|---|---|---|
-| _(empty)_ | Lavanda-Light | Lavanda-Dark |
-| `-Sea` | Lavanda-Sea-Light | Lavanda-Sea-Dark |
+| Variant | Dir suffix | Color scheme file |
+|---------|-----------|-------------------|
+| Lavanda Light | `Lavanda-Light` | `LavandaLight.colors` |
+| Lavanda Dark  | `Lavanda-Dark`  | `LavandaDark.colors` |
+| Sea Light     | `Lavanda-Sea-Light` | `LavandaSeaLight.colors` |
+| Sea Dark      | `Lavanda-Sea-Dark`  | `LavandaSeaDark.colors` |
 
-Naming is **not uniform** across components:
-- `aurorae/`, `plasma/desktoptheme/`, `wallpaper/`: `{Name}{theme}{color}` → `Lavanda-Sea-Dark`
-- `color-schemes/`: `{Name}{ELSE_THEME}{ELSE_COLOR}` → `LavandaSeaDark.colors`
-- `plasma/look-and-feel/`: `com.github.vinceliuice.{Name}{theme}{color}` → `com.github.vinceliuice.Lavanda-Sea-Dark`
-- `Kvantum/`: `{Name}{ELSE_THEME}` → `LavandaSea/`
+**Naming gotcha**: directories use hyphens (`Lavanda-Dark`), color scheme files drop them (`LavandaDark.colors`). Kvantum dirs use variant-only (`Lavanda/`, `LavandaSea/`).
 
-When adding a component, you must replicate it for all 4 variants with the correct naming for each directory.
+## Directory ownership
 
-## Critical: Logout.qml
+| Dir | Content |
+|-----|---------|
+| `aurorae/` | Window decoration SVGs + rc config (4 variants) |
+| `color-schemes/` | KDE `.colors` palette files (4 files) |
+| `Kvantum/` | Kvantum engine SVG themes (2 variants, no color split) |
+| `plasma/desktoptheme/` | Plasma desktop theme metadata + icons |
+| `plasma/look-and-feel/` | Global theme metadata (com.github.vinceliuice.*) |
+| `sddm/6.0/` | SDDM login theme (QML + assets + zh_CN translations) |
+| `wallpaper/` | Wallpaper images (6 dirs including non-color "base" dirs) |
+| `configs/` | Only `Xresources` — **copied to `~/.Xresources` on install** |
 
-All 4 variants have `contents/logout/`. Background color differs by variant:
-- Light variants: `color: "white"` / `opacity: 0.65`
-- Dark variants: `color: "black"` / `opacity: 0.65`
+## Install scripts
 
-Required files per logout dir: `Logout.qml`, `LogoutButton.qml`, `timer.js`.
+- `./install.sh` — user-level install to `~/.local/share/...`; runs as root → `/usr/share/...`
+- `sudo ./sddm/6.0/install.sh` — SDDM theme (root only)
+- `./uninstall.sh` — removes all Lavanda theme files
 
-## SDDM Themes
+**Side effect**: `install.sh:29` unconditionally copies `configs/Xresources` to `$HOME/.Xresources` (overwrites).
 
-Only `sddm/6.0/` is maintained (Plasma 5 support was removed). Has its own `install.sh` that requires **root** (installs to `/usr/share/sddm/themes`).
+## SDDM specifics
 
-### zh_CN Localization
+- QML-based theme under `sddm/6.0/Lavanda/` and `sddm/6.0/Lavanda-Sea/`
+- Translations: `.ts` files in `translations/` compiled to `.qm` via `lrelease` (or `lrelease-qt6`)
+- Install script auto-configures `LANG=zh_CN.UTF-8` in `/etc/sysconfig/sddm` on zh_CN systems
+- Requires `systemctl restart sddm` after install for locale changes
 
-SDDM theme includes zh_CN translations in `translations/Lavanda_zh_CN.ts`. The install script:
-1. Compiles `.ts` → `.qm` via `lrelease` (requires `qt6-linguist`)
-2. On zh_CN systems, adds `LANG=zh_CN.UTF-8` to `/etc/sysconfig/sddm`
+## When editing theme files
 
-SDDM reads locale from `/etc/sysconfig/sddm`, **not** `sddm.conf`'s `Locale=` setting.
+- Color scheme changes: edit `color-schemes/*.colors` (INI format, RGB comma-separated values)
+- Window decoration: edit SVGs in `aurorae/<variant>/` + `<variant>rc` config
+- Desktop theme: edit `metadata.desktop` in `plasma/desktoptheme/<variant>/`
+- Kvantum: edit SVG in `Kvantum/<variant>/` (shared across Light/Dark)
+- SDDM QML: edit `Main.qml`, `Login.qml`, `Input.qml` etc. in `sddm/6.0/<variant>/`
+- Wallpaper metadata: `wallpaper/<variant>/metadata.json`
 
-Translation files use theme domain `Lavanda` (matching `Theme-Id` in metadata.desktop). QML uses `i18n()` / `i18nc()` (not `i18nd()`).
+## No verification commands
 
-## Known Issues
-
-None.
-
-## Install Behavior
-
-- `install.sh`: Non-root → `~/.local/share/`, root → `/usr/share/`. **Deletes existing** theme dirs before copying. Also overwrites `~/.Xresources`.
-- `uninstall.sh`: Glob-matches `${name}*` — will delete **any** Lavanda-prefixed themes, including manually installed ones.
-- `sddm/*/install.sh`: Root only, installs both `Lavanda` and `Lavanda-Sea` SDDM themes.
-
-## QML Conventions
-
-- Plasma 6 QML: use `import QtQuick` (no version number), `import org.kde.plasma.components as PlasmaComponents`, `import org.kde.kirigami as Kirigami`
-- Logout screen uses `Kirigami.Theme.Complementary` color set
-- Background color for Lavanda-Light logout: `color: "white"` / `opacity: 0.65`
-
-## Directory Map
-
-```
-aurorae/           → window decorations (SVG)
-color-schemes/     → .colors files (KDE color scheme format)
-configs/           → Xresources
-Kvantum/           → Kvantum engine themes (.kvconfig + .svg)
-plasma/
-  desktoptheme/    → Plasma panel/widget themes (SVG/SVGZ)
-  look-and-feel/   → Global themes (QML splash, logout, layouts, metadata)
-sddm/
-  6.0/             → SDDM themes for Plasma 6
-wallpaper/         → Wallpaper packages with metadata.json
-```
+There are no automated checks. After changes, the only verification is installing the theme and visually inspecting in KDE System Settings.
