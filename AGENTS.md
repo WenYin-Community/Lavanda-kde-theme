@@ -25,7 +25,7 @@ Two theme families × two color modes = four combos:
 | `aurorae/` | Window decoration SVGs + rc config (4 variants) |
 | `color-schemes/` | KDE `.colors` palette files (4 files) |
 | `Kvantum/` | Kvantum engine SVG themes (2 variants, no color split) |
-| `plasma/desktoptheme/` | Plasma desktop theme metadata + icons |
+| `plasma/desktoptheme/` | Plasma desktop theme metadata + shared `icons/` (all variants; Sea overrides with `icons-Sea/`) |
 | `plasma/look-and-feel/` | Global theme metadata (com.github.vinceliuice.*) |
 | `sddm/6.0/` | SDDM login theme (QML + assets + zh_CN translations) |
 | `wallpaper/` | Wallpaper images (6 dirs including non-color "base" dirs) |
@@ -33,7 +33,7 @@ Two theme families × two color modes = four combos:
 
 ## Install scripts
 
-- `./install.sh` — user-level install to `~/.local/share/...`; runs as root → `/usr/share/...`
+- `./install.sh` — user-level install to `~/.local/share/...`; **Kvantum goes to `~/.config/Kvantum`**; runs as root → `/usr/share/...`
 - `sudo ./sddm/6.0/install.sh` — SDDM theme (root only)
 - `./uninstall.sh` — removes all Lavanda theme files
 
