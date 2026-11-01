@@ -2,7 +2,7 @@
 
 Lavanda kde theme is a clean and concise theme for KDE Plasma 6 desktop.
 
-Requires Plasma 6.1+ (Qt 6.5+).
+Requires Plasma 6.1+ (Qt 6.5+). Tested with Plasma 6.8.2, Qt 6.11.2 and SDDM 0.21.
 
 In this repository you'll find:
 
@@ -17,29 +17,42 @@ In this repository you'll find:
 
 ## Installation
 
+User-level (no sudo):
+
 ```sh
 ./install.sh
 ```
 
-The installer will prompt whether to install the SDDM theme (requires root).
+System-wide (required for the SDDM greeter, which runs as the `sddm` user and only sees `/usr/share`):
 
-To install SDDM theme manually:
+```sh
+sudo ./install.sh
+```
+
+The installer prompts whether to install the SDDM theme (requires root). To install the SDDM theme manually:
 
 ```sh
 sudo ./sddm/6.0/install.sh
 ```
 
+### Plasma 6.8 compatibility
+
+- Desktop themes use `metadata.json` + `plasmarc`; `[Wallpaper]`, `[AdaptiveTransparency]` and `[ContrastEffect]` are read from `plasmarc`.
+- `opaque/` assets are provided for Plasma 6.8's opaque panel/dialog/tooltip rendering; `solid/` is kept for compatibility.
+- Global themes set wallpaper and splash via `contents/defaults` (`[Wallpaper]`, `[ksplashrc]`).
+- SDDM QML targets SDDM 0.21 / Qt 6 and uses `Keyboards.KWinVirtualKeyboard`.
+
 ### SDDM Localization
 
 The SDDM theme includes zh_CN translations. On zh_CN systems, the install script automatically configures SDDM locale by adding `LANG=zh_CN.UTF-8` to `/etc/sysconfig/sddm`.
 
-After installation, restart SDDM for translations to take effect:
+The installer does **not** restart SDDM. Restart it manually when you want to apply locale or theme changes:
 
 ```sh
 sudo systemctl restart sddm
 ```
 
-If a theme does not have translations for your locale, SDDM will display the original English strings.
+SDDM 0.21 may log `KLocalizedString: Domain is not set` and fall back to English for theme strings; this is a greeter translation-domain limitation, not a QML error.
 
 ### White Logout Screen (optional, user-level)
 
@@ -64,7 +77,8 @@ The main installer also offers this option when run as a regular user.
 ## Uninstall
 
 ```sh
-./uninstall.sh
+./uninstall.sh        # user-level
+sudo ./uninstall.sh   # system-wide
 ```
 
 ## Recommendations
