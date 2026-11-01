@@ -89,86 +89,88 @@ SessionManagementScreen {
         rightPadding: leftPadding
     }
 
-    Input {
-        id: passwordBox
+    RowLayout {
         Layout.fillWidth: true
-        font.pointSize: fontSize + 1
-        Layout.preferredHeight: 30
-        opacity: passwordFieldOutlined ? 1.0 : 0.75
-        font.family: config.Font || "Noto Sans"
-        placeholderText: config.PasswordFieldPlaceholderText == "Password" ? i18n( "Password") : config.PasswordFieldPlaceholderText
-        focus: !showUsernamePrompt || lastUserName
-        echoMode: TextInput.Password
-        onAccepted: startLogin()
-        placeholderTextColor: passwordFieldOutlined ? "white" : "white"
-        passwordCharacter: config.PasswordFieldCharacter == "" ? "●" : config.PasswordFieldCharacter
-        color: "white"
-        //horizontalAlignment: TextInput.AlignHCenter
-        leftPadding: fontSize
-        rightPadding: leftPadding
 
-        Keys.onEscapePressed: {
-            mainStack.currentItem.forceActiveFocus();
+        Input {
+            id: passwordBox
+            Layout.fillWidth: true
+            font.pointSize: fontSize + 1
+            Layout.preferredHeight: 30
+            opacity: passwordFieldOutlined ? 1.0 : 0.75
+            font.family: config.Font || "Noto Sans"
+            placeholderText: config.PasswordFieldPlaceholderText && config.PasswordFieldPlaceholderText !== "Password" ? config.PasswordFieldPlaceholderText : i18n( "Password")
+            focus: !showUsernamePrompt || lastUserName
+            echoMode: TextInput.Password
+            onAccepted: startLogin()
+            placeholderTextColor: passwordFieldOutlined ? "white" : "white"
+            passwordCharacter: config.PasswordFieldCharacter ? config.PasswordFieldCharacter : "●"
+            color: "white"
+            //horizontalAlignment: TextInput.AlignHCenter
+            leftPadding: fontSize
+            rightPadding: leftPadding
+
+            Keys.onEscapePressed: {
+                mainStack.currentItem.forceActiveFocus();
+            }
+
+            Keys.onPressed: {
+                if (event.key == Qt.Key_Left && !text) {
+                    userList.decrementCurrentIndex();
+                    event.accepted = true
+                }
+                if (event.key == Qt.Key_Right && !text) {
+                    userList.incrementCurrentIndex();
+                    event.accepted = true
+                }
+            }
+
+            Keys.onReleased: {
+                if (loginButton.opacity == 0 && length > 0) {
+                    showLoginButton.start()
+                }
+                if (loginButton.opacity > 0 && length == 0) {
+                    hideLoginButton.start()
+                }
+            }
+
+            Connections {
+                target: sddm
+                function onLoginFailed() {
+                    passwordBox.selectAll()
+                    passwordBox.forceActiveFocus()
+                }
+            }
         }
 
-        Keys.onPressed: {
-            if (event.key == Qt.Key_Left && !text) {
-                userList.decrementCurrentIndex();
-                event.accepted = true
+        Image {
+            id: loginButton
+            source: "assets/login.svgz"
+            smooth: true
+            sourceSize: Qt.size(passwordBox.height, passwordBox.height)
+            Layout.alignment: Qt.AlignVCenter
+            Layout.preferredWidth: passwordBox.height
+            Layout.preferredHeight: passwordBox.height
+            visible: opacity > 0
+            opacity: 0
+            MouseArea {
+                anchors.fill: parent
+                onClicked: startLogin();
             }
-            if (event.key == Qt.Key_Right && !text) {
-                userList.incrementCurrentIndex();
-                event.accepted = true
+            PropertyAnimation {
+                id: showLoginButton
+                target: loginButton
+                properties: "opacity"
+                to: 0.75
+                duration: 100
             }
-        }
-
-        Keys.onReleased: {
-            if (loginButton.opacity == 0 && length > 0) {
-                showLoginButton.start()
+            PropertyAnimation {
+                id: hideLoginButton
+                target: loginButton
+                properties: "opacity"
+                to: 0
+                duration: 80
             }
-            if (loginButton.opacity > 0 && length == 0) {
-                hideLoginButton.start()
-            }
-        }
-
-        Connections {
-            target: sddm
-            onLoginFailed: {
-                passwordBox.selectAll()
-                passwordBox.forceActiveFocus()
-            }
-        }
-    }
-
-    Image {
-        id: loginButton
-        source: "assets/login.svgz"
-        smooth: true
-        sourceSize: Qt.size(passwordBox.height, passwordBox.height)
-        anchors {
-            left: passwordBox.right
-            verticalCenter: passwordBox.verticalCenter
-        }
-        anchors.leftMargin: 8
-        visible: opacity > 0
-        opacity: 0
-        MouseArea {
-            anchors.fill: parent
-            onClicked: startLogin();
-        }
-        PropertyAnimation {
-            id: showLoginButton
-            target: loginButton
-            properties: "opacity"
-            to: 0.75
-            duration: 100
-        }
-        PropertyAnimation {
-            id: hideLoginButton
-            target: loginButton
-            properties: "opacity"
-            to: 0
-            duration: 80
         }
     }
 }

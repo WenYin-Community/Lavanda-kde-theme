@@ -6,8 +6,7 @@ TextField {
     placeholderTextColor: config.color
     palette.text: config.color
     font.pointSize: config.fontSize
-    font.family: config.font
-    width: parent.width
+    font.family: config.font || "Noto Sans"
     background: Rectangle {
         radius: 100
         color: "#be5fca"
