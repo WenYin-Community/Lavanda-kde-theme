@@ -91,3 +91,13 @@ read -r -p "Install SDDM theme? (requires root) [y/N] " answer
 if [[ "${answer}" =~ ^[Yy]$ ]]; then
   sudo bash "${SRC_DIR}/sddm/6.0/install.sh"
 fi
+
+# Optional user-level white logout/shutdown screen override
+if [ "$UID" -ne "$ROOT_UID" ]; then
+  read -r -p "Install white logout screen override (user-level)? [y/N] " logout_answer
+  if [[ "${logout_answer}" =~ ^[Yy]$ ]]; then
+    bash "${SRC_DIR}/logout-white/install.sh"
+  fi
+else
+  echo "Run ./logout-white/install.sh as your user to apply the white logout screen."
+fi

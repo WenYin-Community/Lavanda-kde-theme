@@ -27,6 +27,7 @@ Two theme families × two color modes = four combos:
 | `Kvantum/` | Kvantum engine SVG themes (2 variants, no color split) |
 | `plasma/desktoptheme/` | Plasma desktop theme metadata + shared `icons/` (all variants; Sea overrides with `icons-Sea/`) |
 | `plasma/look-and-feel/` | Global theme metadata (com.github.vinceliuice.*) |
+| `logout-white/` | Optional user-level shell logout override (white background) + install/uninstall scripts |
 | `sddm/6.0/` | SDDM login theme (QML + assets + zh_CN translations) |
 | `wallpaper/` | Wallpaper images (6 dirs including non-color "base" dirs) |
 | `configs/` | Only `Xresources` — **copied to `~/.Xresources` on install** |
@@ -35,6 +36,8 @@ Two theme families × two color modes = four combos:
 
 - `./install.sh` — user-level install to `~/.local/share/...`; **Kvantum goes to `~/.config/Kvantum`**; runs as root → `/usr/share/...`
 - `sudo ./sddm/6.0/install.sh` — SDDM theme (root only)
+- `./logout-white/install.sh` — user-level shell override for the white logout/shutdown screen (no sudo)
+- `./logout-white/uninstall.sh` — removes the override and restores the system shell
 - `./uninstall.sh` — removes all Lavanda theme files
 
 **Side effect**: `install.sh:29` unconditionally copies `configs/Xresources` to `$HOME/.Xresources` (overwrites).

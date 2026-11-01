@@ -43,4 +43,9 @@ echo "Uninstalling '${THEME_NAME} kde themes'..."
 
 uninstall "${name:-${THEME_NAME}}"
 
+# Remove the optional user-level white logout override
+if [ "$UID" -ne "$ROOT_UID" ] && [ -f "${XDG_DATA_HOME:-$HOME/.local/share}/plasma/shells/org.kde.plasma.desktop/contents/logout/.lavanda-white-logout" ]; then
+  bash "${SRC_DIR}/logout-white/uninstall.sh"
+fi
+
 echo "Uninstall finished..."
