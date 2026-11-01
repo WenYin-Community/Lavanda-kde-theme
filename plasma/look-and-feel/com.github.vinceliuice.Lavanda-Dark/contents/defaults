@@ -25,3 +25,9 @@ theme=__aurorae__svg__Lavanda-Dark
 
 [plasmarc][Theme]
 name=Lavanda-Dark
+
+[Wallpaper]
+Image=Lavanda-Dark
+
+[ksplashrc][KSplash]
+Theme=com.github.vinceliuice.Lavanda-Dark

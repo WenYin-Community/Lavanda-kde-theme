@@ -1,0 +1,19 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "vinceliuice@hotmail.com",
+                "Name": "Vince Liuice"
+            }
+        ],
+        "Category": "",
+        "Description": "Lavanda Sea Dark theme for Plasma",
+        "EnabledByDefault": true,
+        "Id": "Lavanda-Sea-Dark",
+        "License": "LGPL",
+        "Name": "Lavanda-Sea-Dark",
+        "Version": "6.6.4",
+        "Website": "https://github.com/vinceliuice/Lavanda-kde"
+    },
+    "X-Plasma-API": "6.0"
+}

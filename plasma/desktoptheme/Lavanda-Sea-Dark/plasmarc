@@ -1,0 +1,14 @@
+[Wallpaper]
+defaultWallpaperTheme=Lavanda-Sea-Dark
+defaultFileSuffix=.png
+defaultHeight=3840
+defaultWidth=3840
+
+[AdaptiveTransparency]
+enabled=true
+
+[ContrastEffect]
+contrast=0.2
+enabled=false
+intensity=1.4
+saturation=10

@@ -12,7 +12,7 @@
             "Plasma/LookAndFeel"
         ],
         "EnabledByDefault": true,
-        "Description": "Lavanda Sea Dark theme for kde plasma",
+        "Description": "Lavanda Sea Light theme for KDE Plasma",
         "Id": "com.github.vinceliuice.Lavanda-Sea-Light",
         "License": "GPLv3",
         "Name": "Lavanda-Sea-Light",
