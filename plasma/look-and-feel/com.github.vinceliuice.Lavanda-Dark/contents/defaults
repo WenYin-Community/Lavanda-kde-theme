@@ -20,7 +20,7 @@ LayoutName=org.kde.breeze.desktop
 BorderSize=Tiny
 ButtonsOnLeft=XAI
 ButtonsOnRight=
-library=org.kde.kwin.aurorae
+library=org.kde.kwin.aurorae.v2
 theme=__aurorae__svg__Lavanda-Dark
 
 [plasmarc][Theme]
