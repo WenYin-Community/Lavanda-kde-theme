@@ -37,9 +37,8 @@ sudo ./sddm/6.0/install.sh
 
 ### Window decoration (Aurorae)
 
-- Slim 22px title bar; window buttons fill the full title-bar height.
 - macOS-style traffic-light buttons (kept on the right side): close = red, minimize = yellow, maximize/restore = green. Symbols appear on hover; inactive windows show gray dots.
-- Rounded window corners: 10px at the top, 4px at the bottom. Maximized windows have no rounded corners (expected Aurorae behavior).
+- Original title bar geometry is preserved (30px bar, 12px top corner radius, 4px bottom corner radius). Maximized windows have no rounded corners (expected Aurorae behavior).
 - The `mask-*` elements in `decoration.svg` define the blur region (via `KDecoration3::setBlurRegion`), not the window outline; the corner shape comes from the `decoration-*` elements.
 
 ### Plasma 6.8 compatibility
