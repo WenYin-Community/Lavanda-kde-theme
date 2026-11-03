@@ -35,6 +35,13 @@ The installer prompts whether to install the SDDM theme (requires root). To inst
 sudo ./sddm/6.0/install.sh
 ```
 
+### Window decoration (Aurorae)
+
+- Slim 22px title bar; window buttons fill the full title-bar height.
+- macOS-style traffic-light buttons (kept on the right side): close = red, minimize = yellow, maximize/restore = green. Symbols appear on hover; inactive windows show gray dots.
+- Rounded window corners: 10px at the top, 4px at the bottom. Maximized windows have no rounded corners (expected Aurorae behavior).
+- The `mask-*` elements in `decoration.svg` define the blur region (via `KDecoration3::setBlurRegion`), not the window outline; the corner shape comes from the `decoration-*` elements.
+
 ### Plasma 6.8 compatibility
 
 - Desktop themes use `metadata.json` + `plasmarc`; `[Wallpaper]`, `[AdaptiveTransparency]` and `[ContrastEffect]` are read from `plasmarc`.

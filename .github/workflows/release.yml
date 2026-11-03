@@ -1,0 +1,31 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pack source tarball
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          git archive --format=tar.gz --prefix="Lavanda-kde-theme-${VERSION}/" \
+            -o "Lavanda-kde-theme-${VERSION}.tar.gz" "$GITHUB_REF_NAME"
+          sha256sum "Lavanda-kde-theme-${VERSION}.tar.gz" > "Lavanda-kde-theme-${VERSION}.tar.gz.sha256"
+
+      - name: Create release and upload tarball
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            Lavanda-kde-theme-*.tar.gz Lavanda-kde-theme-*.tar.gz.sha256 \
+            --title "Lavanda-kde-theme ${GITHUB_REF_NAME}" \
+            --generate-notes
