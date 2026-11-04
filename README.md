@@ -17,6 +17,22 @@ In this repository you'll find:
 
 ## Installation
 
+### Install from COPR (Fedora / RHEL / derivatives)
+
+Prebuilt noarch RPMs are published on
+[COPR](https://copr.fedorainfracloud.org/coprs/ruojiner/lavanda-kde-theme/)
+for Fedora 44/45 and EPEL 10:
+
+```sh
+sudo dnf copr enable ruojiner/lavanda-kde-theme
+sudo dnf install lavanda-kde-theme
+```
+
+Note: on EPEL 10 the SDDM theme ships without compiled zh_CN translations
+(Fedora builds include them).
+
+### Install from source
+
 User-level (no sudo):
 
 ```sh
