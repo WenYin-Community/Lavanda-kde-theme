@@ -88,6 +88,14 @@ translucent background and dark text:
 ./logout-white/uninstall.sh
 ```
 
+When installed from the COPR RPM (v1.0.2+), the same helper is shipped as
+data and can be enabled the same way — no source checkout needed:
+
+```sh
+/usr/share/lavanda-kde-theme/logout-white/install.sh
+/usr/share/lavanda-kde-theme/logout-white/uninstall.sh
+```
+
 - No sudo, no system files, no KDE global configuration changes.
 - Installs only under `~/.local/share/plasma/shells/org.kde.plasma.desktop`.
 - Re-run the installer after Plasma updates; uninstall restores the system shell.

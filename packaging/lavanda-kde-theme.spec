@@ -1,5 +1,5 @@
 Name:           lavanda-kde-theme
-Version:        1.0.1
+Version:        1.0.2
 Release:        1%{?dist}
 Summary:        Lavanda theme suite for KDE Plasma 6
 
@@ -84,6 +84,11 @@ done
 cp -a sddm/6.0/Lavanda     "$D"%{sddm_themedir}/Lavanda
 cp -a sddm/6.0/Lavanda-Sea "$D"%{sddm_themedir}/Lavanda-Sea
 
+# Optional user-level white logout override: shipped as data, the user
+# enables it by running the packaged install.sh (no sudo, touches $HOME only).
+install -d "$D"%{_datadir}/lavanda-kde-theme
+cp -a logout-white "$D"%{_datadir}/lavanda-kde-theme/logout-white
+
 %files
 %doc README.md AUTHORS
 %license LICENSE
@@ -95,8 +100,13 @@ cp -a sddm/6.0/Lavanda-Sea "$D"%{sddm_themedir}/Lavanda-Sea
 %{_datadir}/wallpapers/Lavanda*
 %{sddm_themedir}/Lavanda
 %{sddm_themedir}/Lavanda-Sea
+%{_datadir}/lavanda-kde-theme
 
 %changelog
+* Wed Nov 04 2026 Wenyin Root <wenyin@ruojiner.cn> - 1.0.2-1
+- Ship the optional logout-white user-level override as data under
+  /usr/share/lavanda-kde-theme/logout-white for RPM users to enable.
+
 * Wed Nov 04 2026 Wenyin Root <wenyin@ruojiner.cn> - 1.0.1-1
 - Initial package: Aurorae decorations with macOS traffic-light buttons,
   Plasma desktop/global themes, color schemes, Kvantum, SDDM, wallpapers.
