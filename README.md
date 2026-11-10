@@ -57,6 +57,21 @@ sudo ./sddm/6.0/install.sh
 - Original title bar geometry is preserved (30px bar, 12px top corner radius, 4px bottom corner radius). Maximized windows have no rounded corners (expected Aurorae behavior).
 - The `mask-*` elements in `decoration.svg` define the blur region (via `KDecoration3::setBlurRegion`), not the window outline; the corner shape comes from the `decoration-*` elements.
 
+### FreeBSD
+
+FreeBSD keeps KDE data files under `/usr/local`. Use the POSIX `sh`
+installer (no bash required, FreeBSD `/bin/sh` compatible):
+
+```sh
+./install-freebsd.sh               # user-level install
+sudo ./install-freebsd.sh          # system-wide install (+ optional SDDM theme)
+./install-freebsd.sh uninstall     # remove user-level install
+sudo ./install-freebsd.sh uninstall # remove system-wide install
+```
+
+Verified on FreeBSD 15.1: user-level and system-wide install/uninstall both
+leave no leftovers.
+
 ### Plasma 6.8 compatibility
 
 - Desktop themes use `metadata.json` + `plasmarc`; `[Wallpaper]`, `[AdaptiveTransparency]` and `[ContrastEffect]` are read from `plasmarc`.
