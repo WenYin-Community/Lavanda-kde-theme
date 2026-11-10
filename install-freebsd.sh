@@ -65,6 +65,11 @@ find_lrelease() {
 compile_translations() {
     target_dir=$1
     if ! lrelease_bin=$(find_lrelease); then
+        if [ "${LRELEASE_WARNED:-0}" -eq 0 ]; then
+            LRELEASE_WARNED=1
+            echo "WARNING: lrelease not found; SDDM translations will stay uncompiled (.ts only)." >&2
+            echo "         Install it with: pkg install qt6-tools, then re-run this script." >&2
+        fi
         return 0
     fi
     for ts_file in "$target_dir"/translations/*.ts; do

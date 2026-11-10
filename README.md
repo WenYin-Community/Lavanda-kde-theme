@@ -84,6 +84,11 @@ leave no leftovers.
 
 The SDDM theme includes zh_CN translations. On zh_CN systems, the install script automatically configures SDDM locale by adding `LANG=zh_CN.UTF-8` to `/etc/sysconfig/sddm`.
 
+Translation compilation requires Qt's `lrelease` tool. If it is missing, the
+installers warn (non-fatal, the theme still works in English) and tell you the
+package to install: `qt6-linguist` (Fedora), `qt6-tools` (Arch/FreeBSD), or
+`qt6-l10n-tools` (Debian/Ubuntu).
+
 The installer does **not** restart SDDM. Restart it manually when you want to apply locale or theme changes:
 
 ```sh

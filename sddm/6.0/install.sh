@@ -49,6 +49,13 @@ compile_translations() {
         lrelease "${ts_file}" -qm "${qm_file}" 2>/dev/null
       elif command -v lrelease-qt6 >/dev/null 2>&1; then
         lrelease-qt6 "${ts_file}" -qm "${qm_file}" 2>/dev/null
+      else
+        if [ "${LRELEASE_WARNED:-0}" -eq 0 ]; then
+          LRELEASE_WARNED=1
+          prompt -w " * lrelease not found; SDDM translations will stay uncompiled (.ts only)."
+          prompt -w " * Install Qt 6 Linguist tools and re-run: Fedora: qt6-linguist | Arch: qt6-tools | Debian/Ubuntu: qt6-l10n-tools"
+        fi
+        return 0
       fi
     done
   fi
