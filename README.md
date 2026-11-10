@@ -3,6 +3,7 @@
 Lavanda kde theme is a clean and concise theme for KDE Plasma 6 desktop.
 
 Requires Plasma 6.1+ (Qt 6.5+). Tested with Plasma 6.8.2, Qt 6.11.2 and SDDM 0.21.
+FreeBSD is supported through a POSIX `sh` installer (verified on FreeBSD 15.1).
 
 In this repository you'll find:
 

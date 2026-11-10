@@ -1,5 +1,5 @@
 Name:           lavanda-kde-theme
-Version:        1.0.2
+Version:        1.1.0
 Release:        1%{?dist}
 Summary:        Lavanda theme suite for KDE Plasma 6
 
@@ -103,6 +103,10 @@ cp -a logout-white "$D"%{_datadir}/lavanda-kde-theme/logout-white
 %{_datadir}/lavanda-kde-theme
 
 %changelog
+* Tue Nov 10 2026 Wenyin Root <wenyin@ruojiner.cn> - 1.1.0-1
+- Upstream adds install-freebsd.sh (POSIX sh installer for FreeBSD,
+  user-level and system-wide install/uninstall).
+
 * Wed Nov 04 2026 Wenyin Root <wenyin@ruojiner.cn> - 1.0.2-1
 - Ship the optional logout-white user-level override as data under
   /usr/share/lavanda-kde-theme/logout-white for RPM users to enable.
